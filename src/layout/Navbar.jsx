@@ -1,24 +1,35 @@
+import { NavLink } from "react-router";
 import { useAuth } from "../auth/AuthContext";
-import { usePage } from "./PageContext";
 
 /** Navbar with site navigation links */
 export default function Navbar() {
-  const { token, logout } = useAuth();
-  const { setPage } = usePage();
   return (
     <header>
       <p>Fitness Trackr</p>
       <nav>
-        <a onClick={() => setPage("activities")}>Activities</a>
-        {token ? (
-          <a onClick={() => logout()}>Log out</a>
-        ) : (
-          <>
-            <a onClick={() => setPage("register")}>Register</a>
-            <a onClick={() => setPage("login")}>Login</a>
-          </>
-        )}
+        <ActivitiesLink />
+        <AccountLinks />
       </nav>
     </header>
+  );
+}
+
+function ActivitiesLink() {
+  return <NavLink to="/activities">Activities</NavLink>;
+}
+
+function AccountLinks() {
+  const { token, logout } = useAuth();
+  return token ? (
+    <>
+      <NavLink to="/activities" onClick={() => logout()}>
+        logout
+      </NavLink>
+    </>
+  ) : (
+    <>
+      <NavLink to="/register">Register</NavLink>
+      <NavLink to="/login">Login</NavLink>
+    </>
   );
 }
