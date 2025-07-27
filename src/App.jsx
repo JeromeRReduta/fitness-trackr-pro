@@ -17,12 +17,19 @@ export default function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/activities" index element={<ActivitiesPage />} />
-        <Route path="/activities/:id" element={<ActivityDetails />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/routines" element={<RoutinesPage />} />
-        <Route path="/routines/:id" element={<RoutineDetails />} />
+        <Route index element={<ActivitiesPage />} />
+        <Route path="/activities">
+          <Route index element={<ActivitiesPage />} />
+          <Route path=":id" element={<ActivityDetails />} />
+        </Route>
+        <Route path="/account">
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+        </Route>
+        <Route path="/routines">
+          <Route index element={<RoutinesPage />} />
+          <Route path=":id" element={<RoutineDetails />} />
+        </Route>
         <Route path="*" element={<Error404 />} />
       </Route>
     </Routes>

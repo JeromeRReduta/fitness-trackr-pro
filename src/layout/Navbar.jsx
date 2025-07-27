@@ -3,24 +3,8 @@ import { useAuth } from "../auth/AuthContext";
 
 /** Navbar with site navigation links */
 export default function Navbar() {
-  return (
-    <header>
-      <p>Fitness Trackr</p>
-      <nav>
-        <ActivitiesLink />
-        <AccountLinks />
-      </nav>
-    </header>
-  );
-}
-
-function ActivitiesLink() {
-  return <NavLink to="/activities">Activities</NavLink>;
-}
-
-function AccountLinks() {
   const { token, logout } = useAuth();
-  return token ? (
+  const accountLinks = token ? (
     <>
       <NavLink to="/activities" onClick={() => logout()}>
         logout
@@ -28,8 +12,18 @@ function AccountLinks() {
     </>
   ) : (
     <>
-      <NavLink to="/register">Register</NavLink>
-      <NavLink to="/login">Login</NavLink>
+      <NavLink to="/account/register">Register</NavLink>
+      <NavLink to="/account/login">Login</NavLink>
     </>
+  );
+  return (
+    <header>
+      <p>Fitness Trackr</p>
+      <nav>
+        <NavLink to="/activities">Activities</NavLink>
+        <NavLink to="/routines">Routines</NavLink>
+        {accountLinks}
+      </nav>
+    </header>
   );
 }

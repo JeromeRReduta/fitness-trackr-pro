@@ -1,6 +1,4 @@
-import { useAuth } from "../auth/AuthContext";
 import useQuery from "../api/useQuery";
-import useMutation from "../api/useMutation";
 import { Link } from "react-router";
 
 /** Shows a list of activities. */
@@ -28,7 +26,7 @@ function ActivityListItem({ activity }) {
   return (
     <li>
       <div>
-        <Link to={`/activities/${activity.id}`}>{activity.name}</Link>{" "}
+        <Link to={`/${activity.id}`}>{activity.name}</Link>{" "}
       </div>
     </li>
   );
