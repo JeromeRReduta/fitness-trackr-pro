@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
+import useMutation from "../api/useMutation";
 import useQuery from "../api/useQuery";
 import { useAuth } from "../auth/AuthContext";
-import useMutation from "../api/useMutation";
+import getUrl, { errorUrl } from "../urls/urls";
 
 export default function ActivityDetails() {
   const { id } = useParams();
@@ -18,10 +20,12 @@ export default function ActivityDetails() {
     error: deleteError,
   } = useMutation("DELETE", "/activities/" + id, ["activities"]);
 
-  if (queryError) {
-    navigateTo("error");
-    return; // Unsure if this is needed
-  }
+  useEffect(() => {
+    if (queryError) {
+      navigateTo(errorUrl);
+    }
+  }, [navigateTo, queryError]);
+
   if (loadingQuery) {
     return <div className="loading">Loading...</div>;
   }
@@ -40,8 +44,5 @@ export default function ActivityDetails() {
       </div>
     );
   }
-
-  console.error("THIS PART SHOULD NEVER RUN");
-  navigateTo("error");
-  return;
+  return null;
 }
