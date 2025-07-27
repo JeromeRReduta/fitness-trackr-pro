@@ -1,5 +1,6 @@
 import useQuery from "../api/useQuery";
 import { Link } from "react-router";
+import getUrl, { activitiesUrl } from "../urls/urls";
 
 /** Shows a list of activities. */
 export default function ActivityList() {
@@ -26,7 +27,7 @@ function ActivityListItem({ activity }) {
   return (
     <li>
       <div>
-        <Link to={`/${activity.id}`}>{activity.name}</Link>{" "}
+        <Link to={`${activitiesUrl}/${activity.id}`}>{activity.name}</Link>{" "}
       </div>
     </li>
   );

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useAuth } from "./AuthContext";
 import { Link, useNavigate } from "react-router";
+import { activitiesUrl, registerUrl } from "../urls/urls";
+import { useAuth } from "./AuthContext";
 
 /** A form that allows users to log into an existing account. */
 export default function Login() {
@@ -14,7 +15,7 @@ export default function Login() {
     const password = formData.get("password");
     try {
       await login({ username, password });
-      navigateTo("/activities");
+      navigateTo(activitiesUrl);
     } catch (e) {
       setError(e.message);
     }
@@ -35,7 +36,7 @@ export default function Login() {
         <button>Login</button>
         {error && <output>{error}</output>}
       </form>
-      <Link to={"/register"}>Need an account? Register here.</Link>
+      <Link to={registerUrl}>Need an account? Register here.</Link>
     </>
   );
 }

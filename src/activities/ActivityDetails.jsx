@@ -1,8 +1,9 @@
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
+import useMutation from "../api/useMutation";
 import useQuery from "../api/useQuery";
 import { useAuth } from "../auth/AuthContext";
-import useMutation from "../api/useMutation";
-import { useEffect } from "react";
+import getUrl, { errorUrl } from "../urls/urls";
 
 export default function ActivityDetails() {
   const { id } = useParams();
@@ -21,8 +22,7 @@ export default function ActivityDetails() {
 
   useEffect(() => {
     if (queryError) {
-      console.log("this runs");
-      navigateTo("/error");
+      navigateTo(errorUrl);
     }
   }, [navigateTo, queryError]);
 
