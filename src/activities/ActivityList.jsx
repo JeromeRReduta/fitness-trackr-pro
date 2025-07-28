@@ -1,6 +1,6 @@
 import useQuery from "../api/useQuery";
 import { Link } from "react-router";
-import getUrl, { activitiesUrl } from "../urls/urls";
+import { activitiesUrl } from "../urls/urls";
 
 /** Shows a list of activities. */
 export default function ActivityList() {
