@@ -27,11 +27,11 @@ export default function Register() {
       <form action={tryRegister}>
         <label>
           Username
-          <input type="text" name="username" required />
+          <input type="text" name="username" required autoComplete="on" />
         </label>
         <label>
           Password
-          <input type="password" name="password" required />
+          <input type="password" name="password" required autoComplete="on" />
         </label>
         <button>Register</button>
         {error && <output>{error}</output>}

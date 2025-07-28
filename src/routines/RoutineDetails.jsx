@@ -22,13 +22,17 @@ export default function RoutineDetails() {
     return <div className="loading">Loading...</div>;
   }
   if (data) {
-    const { name, goal, creatorName } = data;
+    const { name, goal, creatorName, sets } = data;
     return (
       <div className="routine-details">
         <div>{name}</div>
         <div>{goal}</div>
         <div>{creatorName}</div>
-        <SetList data={data} />
+        {!sets || sets.length == 0 ? (
+          <p>No sets found. If you made this routine, log in to add sets!</p>
+        ) : (
+          <SetList sets={sets} />
+        )}
         {token && <SetForm />}
       </div>
     );
