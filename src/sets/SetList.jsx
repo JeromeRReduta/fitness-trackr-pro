@@ -1,7 +1,23 @@
-export default function SetList() {
+import { Link } from "react-router";
+import { activitiesUrl } from "../urls/urls";
+
+export default function SetList({ sets }) {
   return (
-    <>
-      <div>TODO: set list (mayb links on each activity if time)</div>
-    </>
+    <ul>
+      {sets.map((set) => (
+        <SetListItem key={set.id} set={set} />
+      ))}
+    </ul>
+  );
+}
+
+function SetListItem({ set }) {
+  return (
+    <li>
+      <div>
+        <Link to={`${activitiesUrl}/${set.activityId}`}>{set.name}</Link>
+        <p>({set.count})</p>
+      </div>
+    </li>
   );
 }

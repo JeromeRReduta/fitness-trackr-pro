@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import useMutation from "../api/useMutation";
 import useQuery from "../api/useQuery";
 import { useAuth } from "../auth/AuthContext";
-import getUrl, { errorUrl } from "../urls/urls";
+import { errorUrl } from "../urls/urls";
 
 export default function ActivityDetails() {
   const { id } = useParams();

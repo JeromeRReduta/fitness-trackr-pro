@@ -20,11 +20,11 @@ export default function ActivityForm() {
       <form action={addActivity}>
         <label>
           Name
-          <input type="text" name="name" />
+          <input type="text" name="name" autoComplete="on" />
         </label>
         <label>
           Description
-          <input type="text" name="description" />
+          <input type="text" name="description" autoComplete="on" />
         </label>
         <button>{loading ? "Adding..." : "Add activity"}</button>
         {error && <output>{error}</output>}
