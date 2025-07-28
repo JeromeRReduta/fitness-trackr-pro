@@ -14,9 +14,11 @@ export default function RoutineList() {
 
   return (
     <ul>
-      {routines.map((routine) => (
-        <RoutineListItem key={routine.id} routine={routine} />
-      ))}
+      {routines
+        .filter((routine) => routine.isPublic)
+        .map((publicRoutine) => (
+          <RoutineListItem key={publicRoutine.id} routine={publicRoutine} />
+        ))}
     </ul>
   );
 }
