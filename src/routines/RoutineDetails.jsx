@@ -5,24 +5,42 @@ import SetList from "../sets/SetList";
 import { errorUrl } from "../urls/urls";
 import { useEffect } from "react";
 import useQuery from "../api/useQuery";
+import useMutation from "../api/useMutation";
 
 export default function RoutineDetails() {
   const { id } = useParams();
 
   const { token } = useAuth();
-  const { data, loading, error } = useQuery("/routines/" + id, "routines");
+  const {
+    data,
+    loading: isQuerying,
+    error: queryError,
+  } = useQuery("/routines/" + id, "routines");
   const navigateTo = useNavigate();
   useEffect(() => {
-    if (error) {
+    if (queryError) {
       navigateTo(errorUrl);
     }
-  }, [navigateTo, error]);
+  }, [navigateTo, queryError]);
+  const {
+    mutate: deleteRoutine,
+    loading: isDeleting,
+    error: deleteError,
+  } = useMutation("DELETE", "/routines/" + id, ["routines"]);
 
-  if (loading) {
+  if (isQuerying) {
     return <div className="loading">Loading...</div>;
   }
   if (data) {
     const { name, goal, creatorName, sets } = data;
+    let buttonMessage;
+    if (isDeleting) {
+      buttonMessage = "Deleting...";
+    } else if (deleteError) {
+      buttonMessage = deleteError;
+    } else {
+      buttonMessage = "Delete Routine";
+    }
     return (
       <div className="routine-details">
         <div>{name}</div>
@@ -34,6 +52,9 @@ export default function RoutineDetails() {
           <SetList sets={sets} />
         )}
         {token && <SetForm />}
+        {token && (
+          <button onClick={() => deleteRoutine()}>{buttonMessage}</button>
+        )}
       </div>
     );
   }
