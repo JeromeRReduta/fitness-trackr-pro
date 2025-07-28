@@ -23,7 +23,6 @@ export default function RoutineDetails() {
   }
   if (data) {
     const { name, goal, creatorName, sets } = data;
-    console.log(data);
     return (
       <div className="routine-details">
         <div>{name}</div>
