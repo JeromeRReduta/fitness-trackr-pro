@@ -19,7 +19,6 @@ export default function SetForm() {
     } catch (error) {
       routineId = null;
     }
-    console.log({ activityId, routineId, count });
     add({ activityId, routineId, count });
   };
 
